@@ -1,0 +1,45 @@
+<!--
+    mousemove event를 활용하여 화면상에 그림을 그리는 듯한 효과를 주는 프로그램
+    현재는 mousemove event 발생때마다 화면에 표시를 하지만 추후에 mouseover, down event를 활용하여 그림판처럼 구현할 예정
+
+-->
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>onMouseMoveTest</title>
+    </head>
+    <body>
+        <div id='textAddedArea'>
+            <canvas id="myCanvas" width="500" height="500" >
+                Your browser does not support the HTML canvas tag.
+            </canvas>
+        </div>
+        <script>
+            // canvas 객체생성
+            var c = document.getElementById("myCanvas");
+            var ctx = c.getContext("2d");
+
+            // canvas size full로 설정하였으나, resize event 추가필요
+            c.width = window.innerWidth;
+            c.height = window.innerHeight;
+
+            // screen.availHeight와 window.innerHeight간 gap 확인
+            var gapOfHeight = screen.availHeight - window.innerHeight;
+
+            var foo = function(){
+                ctx.translate(0,0);
+                ctx.beginPath();
+                // x y에 각각 8씩 빼는 이유 : mouse size = 16x16이므로 점이 표시되는 위치는 mouse 끝으로 설정하기 위해서
+                ctx.arc(event.screenX - 8, event.screenY - gapOfHeight - 8,1,0,360);
+                ctx.fillStyle = 'black';
+                ctx.fill();
+            }
+/*
+            var foo = function(){
+                console.log(window.innerWidth + ' ' + screen.availWidth + ' ' + event.screenX + ' <br>' + window.innerHeight + ' ' + screen.availHeight + ' ' + event.screenY + '<br>')
+            }
+*/
+            addEventListener("mousemove", foo);
+        </script>
+    </body>
+</html>
