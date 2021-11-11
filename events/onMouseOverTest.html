@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>onMouseOverTest</title>
+    </head>
+    <body>
+        <div id='textAddedArea'>
+
+        </div>
+        <script>
+            var onCount = 0;
+            var foo = function(){
+                onCount++;
+                document.getElementById('textAddedArea').innerHTML += onCount + 'mouseover!' + event.screenX + '<br>';
+            }
+
+            addEventListener("mouseover", foo);
+        </script>
+    </body>
+</html>
